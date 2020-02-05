@@ -70,19 +70,7 @@ export default function TodoList(){
                     border-radius: 25px;
                     color: #707070;
                 }
-
-                .todo-list::-webkit-scrollbar { 
-                    width: 0 !important 
-                }
-
-                .todo-list { 
-                    overflow: -moz-scrollbars-none; 
-                }
-
-                .todo-list { 
-                    -ms-overflow-style: none; 
-                }
-
+                
                 .todo-list__header{
                     display: flex;
                     justify-content: space-between;

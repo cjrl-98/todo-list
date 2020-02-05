@@ -1,5 +1,6 @@
 import TodoList from '../TodoList/TodoList';
 import CreateTodo from '../CreateTodo/CreateTodo';
+import ExpandedTodoCard from '../ExpandedTodoCard/ExpandedTodoCard';
 
 export default function Layout(){
     return(
@@ -7,6 +8,7 @@ export default function Layout(){
             <main className="main">
                 <div className="main__layout">
                     <TodoList/>
+                    <ExpandedTodoCard/>
                     <CreateTodo/>
                 </div>
                 

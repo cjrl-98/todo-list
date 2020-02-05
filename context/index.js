@@ -33,14 +33,14 @@ export const StoreProvider = (props) => {
 
     const [currentTodo, setCurrentTodo] = useState("51f724b4-bb96-48d1-b2ed-e48e5f399e1b");
     
-    const handleNewTodo = (title, date, description) => {
+    const handleNewTodo = (title, date, labels, description) => {
         setTodoList([ ...todoList, 
             {
                 "id" : uuid.v4(),
                 "status" : false,
                 "title" : title,
                 "date" : `${date}`,
-                "labels" : [],
+                "labels" : labels,
                 "description" : description
             }
         ])
