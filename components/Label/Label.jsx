@@ -28,7 +28,9 @@ export default function Label ({text}) {
                     color: #FFFFFF;
                     border-radius: 25px;
                     padding: 8px 16px;
-                    margin-right: 16px;
+                    margin-right: 8px;
+                    margin-left: 8px;
+                    margin-bottom: 16px;
                 }   
             `}</style>
         </>

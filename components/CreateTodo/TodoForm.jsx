@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import { motion } from 'framer-motion';
 import { useForm } from "react-hook-form";
 import CustomCalendar from './CustomCalendar';
 import CreateLabelsGroup from './CreateLabelsGroup';
@@ -8,7 +9,12 @@ export default function TodoForm({handleChangeModalState, todo}){
     const [startDate, setStartDate] = useState(new Date());
     const [labelsGroup, setLabelsGroup] = useState(null);
     const { handleNewTodo, handleKeyUpdate } = useContext(StoreContext);
-    const { register, handleSubmit, setValue } = useForm();
+    const { register, handleSubmit, setValue, reset } = useForm();
+
+    const buttonOptions = {
+        whileHover : { scale: 1.1},
+        whileTap : { scale: 0.8 },
+    }
 
     useEffect(()=>{
         if(todo){
@@ -24,9 +30,12 @@ export default function TodoForm({handleChangeModalState, todo}){
             handleKeyUpdate(todo.id, "title", input.title,);
             handleKeyUpdate(todo.id, "date", `${startDate}`);
             handleKeyUpdate(todo.id, "description", input.description);
-        }else{
-            handleNewTodo(input.title, startDate, labelsGroup, input.description);
+            handleKeyUpdate(todo.id, "labels", labelsGroup);
+        }else{ 
+            handleNewTodo(input.title, startDate, labelsGroup, input.description); 
+            reset();
         }
+        handleChangeModalState();
     };
     
     return(
@@ -37,8 +46,8 @@ export default function TodoForm({handleChangeModalState, todo}){
                 <CustomCalendar register={register} startDate={startDate} setStartDate={setStartDate}/>
                 <CreateLabelsGroup setLabelsGroup={setLabelsGroup} todo={ todo ? todo : null}/>
                 <textarea className="form__input" name="description" type="text" placeholder="Description" rows={7} ref={register}/>
-                <button className="form__button">Add Task</button>
-                <button className="form__button form__button--cancel" type="button" onClick={handleChangeModalState}>Cancel</button>
+                <motion.button {...buttonOptions} className="form__button">Add Task</motion.button>
+                <motion.button {...buttonOptions} className="form__button form__button--cancel" type="button" onClick={handleChangeModalState}>Cancel</motion.button>
             </form>
             <style jsx>{`
                 .form{

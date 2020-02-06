@@ -90,10 +90,10 @@ export default function ExpandedTodoCard(){
                             <div className="expanded-todo__body">
                                 <p className="body__description">{description}</p>
                             </div>
+                            <Modal {...editModalOptions}>
+                                <TodoForm handleChangeModalState={handleChangeModalState} todo={{title, date, description, status, id, labels}}/>
+                            </Modal>
                         </motion.div>
-                        <Modal {...editModalOptions}>
-                            <TodoForm handleChangeModalState={handleChangeModalState} todo={{title, date, description, status, id, labels}}/>
-                        </Modal>
                     </AnimatePresence> : null }
             </article>
             <style jsx>{`
@@ -171,7 +171,6 @@ export default function ExpandedTodoCard(){
                 .labels__container{
                     display : flex;
                     margin-left: 15%;
-                    margin-bottom: 16px;
                 }
 
                 .expanded-todo__body{

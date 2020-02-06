@@ -8,15 +8,13 @@ export default class CreateLabelsGroup extends React.Component {
     inputValue: '',
   };
 
-  componentDidMount() {
-    if (this.props.todo) {
-      this.setState({ tags : this.props.todo.labels }, () => console.log(this.state.tags));
-    }
+  handleTagSetStateCallback = () => {
+    this.props.setLabelsGroup(this.state.tags)
   }
 
   handleClose = removedTag => {
     const tags = this.state.tags.filter(tag => tag !== removedTag);
-    this.setState({ tags });
+    this.setState({ tags }, this.handleTagSetStateCallback);
   };
 
   showInput = () => {
@@ -37,10 +35,16 @@ export default class CreateLabelsGroup extends React.Component {
       tags,
       inputVisible: false,
       inputValue: '',
-    }, () => { this.props.setLabelsGroup(this.state.tags) });
+    },  this.handleTagSetStateCallback);
   };
 
   saveInputRef = input => (this.input = input);
+
+   componentDidMount() {
+    if (this.props.todo) {
+      this.setState({ tags : this.props.todo.labels }, this.handleTagSetStateCallback);
+    }
+  }
 
   render() {
     const { tags, inputVisible, inputValue } = this.state;
